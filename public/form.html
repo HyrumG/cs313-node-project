@@ -2,16 +2,38 @@
 <html>
 <head>
 	<title>Baby Tracker</title>
-	<script type="text/javascript" src="validate.js"></script>
+	<script type="text/javascript" src="diapersAjax.js"></script>
 </head>
 <body>
-	<h1>Postal Rate Calculator</h1>
-	<form action="/getRate" method="GET">
-		First Name: <input type="text" name="fname">
+	<h2>View Recent Diapers</h2>
+	<form action="" method="GET">
+		First Name: <input type="text" name="fname" id="fnameView">
 		<br>
-		Last Name: <input type="text" name="lname">
 		<br>
-
+		Last Name: <input type="text" name="lname" id="lnameView">
+		
+        <input type="button" name="getDiapers" value="Get Diapers" onclick="getLastDiapers()">
+	</form>
+	
+	<div>
+	  <p id="diaperResult"></p>
+	</div>
+   
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2>Enter Diaper</h2>
+	<form action="">
+		First Name: <input type="text" name="fname" id="fnameInsert">
+		<br>
+		<br>
+		Last Name: <input type="text" name="lname" id="lnameInsert">
+		<br>
+		<br>
+		Time of Diaper Change: <input type="datetime-local" name="changeTime" id="changeTime">
+        <br>
+        <br>
 		Diaper State:
 		<select name="diaperStatus" id="diaperStatus">
 			<option>Dry</option>
@@ -19,8 +41,8 @@
 			<option>Dirty</option>
 			<option>Mixed</option>
 		</select>
-
-		<input type="submit" name="submit">
+		
+		<input type="button" value="Enter Diaper" onclick="enterDiaper()">
 	</form>
 </body>
 </html>
