@@ -17,6 +17,7 @@ app.set("port", (process.env.PORT || 5000))
 //  .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('views/index'))
   .get('/getLastDiapers', getLastDiapers)
+  .post("insertDiaper", insertDiaper)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 function getLastDiapers(req, res) {
@@ -64,3 +65,21 @@ function getLastDiapersFromDb(name, callback) {
 	});
 
 } // end of getPersonFrom
+
+function insertDiaper(req, res) {
+    var fname = req.body.fnameInsert;
+    var lname = req.body.lnameInsert;
+    
+    var tempChangeTime = req.body.changeTime;
+    var changeTime = tempChangeTime.replace("T", " ");
+    
+    var diaperStatus = req.body.diaperStatus;
+}
+
+
+
+
+
+
+
+
