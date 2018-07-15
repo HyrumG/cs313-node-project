@@ -74,6 +74,8 @@ function insertDiaper(req, res) {
     var changeTime = tempChangeTime.replace("T", " ");
     
     var diaperStatus = req.body.diaperStatus;
+    
+    
 }
 
 
