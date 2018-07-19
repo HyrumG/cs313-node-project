@@ -17,6 +17,7 @@
 	</form>
 	
 	<div>
+      <h2>History of Diapers You Changed</h2>
 	  <p id="diaperResult"></p>
 	</div>
    
@@ -29,7 +30,7 @@
 		First Name: <input type="text" name="insertFirst" id="insertFirst">
 		<br>
 		<br>
-		Last Name: <input type="text" name="insertLast" id="insertlast">
+		Last Name: <input type="text" name="insertLast" id="insertLast">
 		<br>
 		<br>
 		Time of Diaper Change: <input type="datetime-local" name="changeTime" id="changeTime">
@@ -43,7 +44,7 @@
 			<option value="4">Mixed</option>
 		</select>
 		
-		<input type="button" name="enterDiaper" value="Enter Diaper" id="enterDiaper" onclick="enterDiaper()">
+		<input type="button" name="enterDiaper" value="Enter Diaper" id="enterDiaper" onclick="callAjaxPost()">
 	</form>
 </body>
 </html>

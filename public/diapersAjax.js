@@ -48,18 +48,32 @@ function handleResultGetDiapersList(results) {
 }
 
 function callAjaxPost() {
-    $("#enterDiaper").click(function () {
-        $.post("/insertDiaper", 
-              {
-            insertFirst: $("#insertFirst").val(),
-            insertLast: $("#insertLast").val(),
-            changeTime: $("#changeTime").val(),
-            diaperStatus: $("#diaperStatus").val()
-        }, handleResultPost()
-        );
-    })
+    var dataToSend = { 
+        insertFirst: $("#insertFirst").val(),
+        insertLast: $("#insertLast").val(),
+        changeTime: $("#changeTime").val(),
+        diaperStatus: $("#diaperStatus").val()};
+    
+    console.log(dataToSend.insertFirst);
+    console.log(dataToSend.insertLast);
+    console.log(dataToSend.changeTime);
+    console.log(dataToSend.diaperStatus);
+    
+    $.ajax({type: 'POST',
+            data: JSON.stringify(dataToSend),
+            contentType: 'application/json',
+            url: '/insertDiaper',				
+            success: function(dataBack) {
+                console.log('success');
+                console.log(JSON.stringify(dataBack));
+                handleResultPost(dataToSend);
+                    }
+            });
 }
 
-function handleResultPost() {
-    alert("Came back from posting to the DB.");
+function handleResultPost(data) {
+    var url = "/getLastDiapers?name=" + data.insertFirst + " " + data.insertLast;
+    console.log("The url in handleResultPost is: ", url);
+//    console.log("The url before calling ajax is: ", url);
+	callAjaxGet(url, handleResultGetDiapersList)
 }
