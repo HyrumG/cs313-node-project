@@ -30,7 +30,7 @@ function handleResultGetDiapersList(results) {
     var formatHTML = "";
     
     var myObj = JSON.parse(results);
-    console.log("Outside loop, name is: ", myObj[1].name);
+    console.log("Outside loop, name is: ", myObj[0].name);
     
     var x;
     for (var i = 0; i < myObj.length; i++) {
