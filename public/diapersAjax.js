@@ -1,3 +1,9 @@
+/*************************************************************
+**************************************************************
+******************FUNCTIONS RELATED TO GETTING****************
+**************************************************************
+**************************************************************
+*/
 function callAjaxGet(url, callback) {
 	var xmlObj = new XMLHttpRequest();
 	xmlObj.onreadystatechange = function () {
@@ -47,6 +53,12 @@ function handleResultGetDiapersList(results) {
     document.getElementById("diaperResult").innerHTML = formatHTML;
 }
 
+/*************************************************************
+**************************************************************
+******************FUNCTIONS RELATED TO POSTING****************
+**************************************************************
+**************************************************************
+*/
 function callAjaxPost() {
     var dataToSend = { 
         insertFirst: $("#insertFirst").val(),
