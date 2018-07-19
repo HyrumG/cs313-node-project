@@ -36,7 +36,7 @@ function handleResultGetDiapersList(results) {
     for (var i = 0; i < myObj.length; i++) {
 			var name = myObj[i].name;
             var lastChanged = myObj[i].last_changed.replace("T", " ");
-            lastChanged = lastChanged.slice(0, s.lastIndexOf("."));
+            lastChanged = lastChanged.slice(0, lastChanged.lastIndexOf("."));
             var status = myObj[i].status;
             console.log("Inside for loop name is: ", name);
             console.log("Inside for loop last changed is: ", lastChanged);
