@@ -126,6 +126,7 @@ function insertDiaper(req, res) {
                       console.log(err);   
                 } else {
                     // Maybe redirect to a page that will show their history
+                    res.json(result.rows);
                 }
             });
         }
