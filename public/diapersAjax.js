@@ -1,4 +1,4 @@
-function callAjax(url, callback) {
+function callAjaxGet(url, callback) {
 	var xmlObj = new XMLHttpRequest();
 	xmlObj.onreadystatechange = function () {
 		if (xmlObj.readyState == 4 && xmlObj.status == 200) {
@@ -20,7 +20,7 @@ function getLastDiapers() {
 
 	var url = "/getLastDiapers?name=" + fname + " " + lname;
     console.log("The url before calling ajax is: ", url);
-	callAjax(url, handleResultGetDiapersList)
+	callAjaxGet(url, handleResultGetDiapersList)
 }
 
 function handleResultGetDiapersList(results) {
@@ -45,4 +45,21 @@ function handleResultGetDiapersList(results) {
             formatHTML += "Name: " + name + ", Last Changed on " + lastChanged + ", status: " + status + "<br>";
 		}
     document.getElementById("diaperResult").innerHTML = formatHTML;
+}
+
+function callAjaxPost() {
+    $("#enterDiaper").click(function () {
+        $.post("/insertDiaper", 
+              {
+            insertFirst: $("#insertFirst").val(),
+            insertLast: $("#insertLast").val(),
+            changeTime: $("#changeTime").val(),
+            diaperStatus: $("#diaperStatus").val()
+        }, handleResultPost()
+        );
+    })
+}
+
+function handleResultPost() {
+    alert("Came back from posting to the DB.");
 }
