@@ -25,7 +25,7 @@ function getLastDiapers() {
 
 function handleResultGetDiapersList(results) {
 	console.log("Back from AJAX with result: ");
-	console.log("result");
+	console.log(result);
   
     var formatHTML = "";
     
