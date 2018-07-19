@@ -15,9 +15,9 @@ app.set("port", (process.env.PORT || 5000))
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
 //  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('views/index'))
+  .get('/', (req, res) => res.render('views/form'))
   .get('/getLastDiapers', getLastDiapers)
-  .post("insertDiaper", insertDiaper)
+  .post('/insertDiaper', insertDiaper)
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 function getLastDiapers(req, res) {
@@ -67,15 +67,69 @@ function getLastDiapersFromDb(name, callback) {
 } // end of getPersonFrom
 
 function insertDiaper(req, res) {
-    var fname = req.body.fnameInsert;
-    var lname = req.body.lnameInsert;
+    var fname = req.body.insertFirst;
+    var lname = req.body.insertLast;
+    var name = fname + " " + lname;
     
     var tempChangeTime = req.body.changeTime;
     var changeTime = tempChangeTime.replace("T", " ");
     
     var diaperStatus = req.body.diaperStatus;
     
+    console.log("First Name is: ", fname);
+    console.log("Last Name is: ", lname);
+    console.log("Name is: ", name);
+    console.log("Change Time is: ", changeTime);
+    console.log("Diaper Status is: ", diaperStatus);
     
+    // This assumes that the parent already exists
+    // Create an sql to SELECT the parents id 
+    
+//    var sql = "INSERT INTO diaper_change (last_changed, parent_id, status_id) VALUES ($1, ('SELECT id FROM parent WHERE name=$2'), $3)";
+//    
+////    var sql = "SELECT id FROM parent WHERE name=$1";
+//    var params = [changeTime, name, diaperStatus];
+//    
+////    var params = [diaperStatusID]
+//  
+//    pool.query(sql, paramsParentID, function(err, result) {
+//       if (err) {
+//            console.log("Error inserting with existing parent.");
+//            console.log(err);
+//       } else {
+//           // Maybe redirect to a page that will show their history
+//       }
+//    });
+    
+    
+      // This assumes that the parent does not already exist
+    var sqlNewParent = "INSERT INTO parent (name) VALUES ($1) RETURNING id"; 
+    
+    var params = [name]
+     // This is to insert into diaper_change if it is a new parent
+     // The sql is to insert a new parent and get a new id
+    pool.query(sqlNewParent, params, function (err, result) {
+        if (err) {
+            console.log("Error inserting with returning.");
+            console.log(err);
+        }
+        else {
+            console.log("The id of the newly inserted parent is: ", result.rows[0].id);
+            var parentID = result.rows[0].id;
+            var sql2 = "INSERT INTO diaper_change (last_changed, parent_id, status_id) VALUES ($1, $2, $3)"
+    
+              var params2 = [changeTime, parentID, diaperStatus];
+            // Query to insert into diaper_change with the status and date from the req
+            pool.query(sql2, params2, function (err, result) {
+                if (err) {
+                      console.log("Error inserting with returning.");
+                      console.log(err);   
+                } else {
+                    // Maybe redirect to a page that will show their history
+                }
+            });
+        }
+    });
 }
 
 

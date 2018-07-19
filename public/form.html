@@ -25,10 +25,10 @@
     <br>
     <h2>Enter Diaper</h2>
 	<form action="/insertDiaper" method="post">
-		First Name: <input type="text" name="fname" id="fnameInsert">
+		First Name: <input type="text" name="insertFirst" id="insertFirst">
 		<br>
 		<br>
-		Last Name: <input type="text" name="lname" id="lnameInsert">
+		Last Name: <input type="text" name="insertLast" id="insertlast">
 		<br>
 		<br>
 		Time of Diaper Change: <input type="datetime-local" name="changeTime" id="changeTime">
@@ -36,13 +36,13 @@
         <br>
 		Diaper State:
 		<select name="diaperStatus" id="diaperStatus">
-			<option>Dry</option>
-			<option>Wet</option>
-			<option>Dirty</option>
-			<option>Mixed</option>
+			<option value="1">Dry</option>
+			<option value="2">Wet</option>
+			<option value="3">Dirty</option>
+			<option value="4">Mixed</option>
 		</select>
 		
-		<input type="button" value="Enter Diaper" onclick="enterDiaper()">
+		<input type="submit" value="Enter Diaper">
 	</form>
 </body>
 </html>

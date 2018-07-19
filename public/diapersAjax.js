@@ -20,10 +20,10 @@ function getLastDiapers() {
 
 	var url = "/getLastDiapers?name=" + fname + " " + lname;
     console.log("The url before calling ajax is: ", url);
-	callAjax(url, handleResultList)
+	callAjax(url, handleResultGetDiapersList)
 }
 
-function handleResultList(results) {
+function handleResultGetDiapersList(results) {
 	console.log("Back from AJAX with result: ");
 	console.log("result");
   
